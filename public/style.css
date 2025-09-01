@@ -1,0 +1,18 @@
+/* Prevent text cursor on non-input elements */
+*:not(input):not(textarea) {
+  caret-color: transparent !important;
+  cursor: default;
+  user-select: none;
+}
+@keyframes pulse-slow {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 2s infinite;
+}

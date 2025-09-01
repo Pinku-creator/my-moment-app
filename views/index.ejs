@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Moments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body class="bg-gray-900 text-white font-sans">
+    <!-- Header -->
+    <header class="text-center py-6 bg-gray-900 border-b border-gray-700">
+      <h1 class="text-2xl sm:text-3xl font-bold text-purple-400">
+        My Moments ✨
+      </h1>
+      <p class="text-gray-400 mt-1 text-sm sm:text-base">
+        Capture your life, one moment at a time
+      </p>
+    </header>
+
+    <!-- Posts Feed -->
+    <main class="px-4 sm:px-8 lg:px-16 py-8">
+      <div class="posts flex flex-col gap-6 sm:gap-8 max-w-2xl mx-auto">
+        <% posts.forEach(post => { %>
+        <div
+          class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700"
+          data-post-id="<%= post.id %>"
+        >
+          <!-- Post Header -->
+          <div class="flex items-center gap-3 px-4 py-3">
+            <img
+              src="https://i.pravatar.cc/100?u=<%= post.user %>"
+              alt="User Avatar"
+              class="w-10 h-10 rounded-full border border-purple-400"
+            />
+            <div>
+              <p class="font-semibold text-sm sm:text-base">
+                @<%= post.user %>
+              </p>
+              <p class="text-xs sm:text-sm text-gray-400">
+                📍 <%= post.location %>
+              </p>
+            </div>
+          </div>
+
+          <!-- Post Image -->
+          <img
+            src="<%= post.imageUrl %>"
+            alt="Post Image"
+            class="w-full max-h-[400px] sm:max-h-[500px] object-cover"
+          />
+
+          <!-- Actions -->
+          <div class="flex items-center justify-between px-4 py-3 text-xl">
+            <div class="flex gap-3 sm:gap-5">
+              <button
+                class="like-btn hover:text-purple-400 transition"
+                title="Like"
+              >
+                💜
+              </button>
+              <a
+                href="/posts/<%= post.id %>/edit"
+                class="hover:text-purple-400 transition"
+                title="Edit"
+                >✏️</a
+              >
+              <a
+                href="/posts/<%= post.id %>"
+                class="hover:text-purple-400 transition"
+                title="View Post"
+                >👁️</a
+              >
+            </div>
+          </div>
+
+          <!-- Likes & Caption -->
+          <div class="px-4 pb-4">
+            <p class="font-semibold likes-count text-sm sm:text-base">
+              <%= post.likes %> likes
+            </p>
+            <p class="text-sm sm:text-base">
+              <span class="font-semibold">@<%= post.user %></span> <%=
+              post.caption %>
+            </p>
+            <p class="text-xs sm:text-sm text-gray-400 mt-1">
+              Mood: <%= post.mood %>
+            </p>
+
+            <!-- Delete Actions -->
+            <div class="flex justify-end gap-2 mt-3">
+              <form method="post" action="/posts/<%= post.id %>?_method=DELETE">
+                <button
+                  class="p-2 rounded-full bg-red-900 text-red-400 shadow-md hover:bg-red-700 transition"
+                  title="Delete"
+                >
+                  🗑️
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </main>
+
+    <!-- Create new Post -->
+    <a
+      href="/posts/new"
+      class="fixed bottom-16 sm:bottom-20 right-6 sm:right-14 z-50 bg-gray-800 hover:bg-purple-700 w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-full shadow-[0_0_15px_5px_rgba(139,92,246,0.3)] transition transform hover:scale-110 animate-pulse-slow"
+      title="Create New Moment"
+    >
+      <span class="text-yellow-400 text-2xl sm:text-3xl">➕</span>
+    </a>
+
+    <footer
+      class="mt-12 w-full bg-gray-900 border-t border-gray-700 py-6 text-center"
+    >
+      <p class="text-gray-500 text-sm">
+        © 2025 Pinky | Designed & Built by Pinky ✨
+      </p>
+    </footer>
+
+    <!-- Script for toggle -->
+    <script src="/script.js"></script>
+  </body>
+</html>
