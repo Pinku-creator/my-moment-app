@@ -23,14 +23,14 @@ cd my-moment-app
 4. Open "http://localhost:8080" in your browser.
 
 
-Contributing 🤝
+## Contributing 🤝
 1. Fork the repository
 2. Create a new branch: git checkout -b feature-name
 3. Make your changes and commit: git commit -am "Add feature"
 4. Push to your branch: git push origin feature-name
 5. Create a new Pull Request
 
-Technologies 🛠️
+## Technologies 🛠️
 Node.js
 Express.js
 EJS
