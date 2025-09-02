@@ -1,0 +1,28 @@
+# -------------------------------
+# Node modules folder (do not push to Git)
+# -------------------------------
+node_modules/
+
+# -------------------------------
+# Uploaded images (public/uploads) 
+# They can be large and are user-specific
+# -------------------------------
+public/uploads/
+
+# -------------------------------
+# Logs
+# -------------------------------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# -------------------------------
+# Environment files (if any)
+# -------------------------------
+.env
+
+# -------------------------------
+# OS generated files
+# -------------------------------
+.DS_Store
+Thumbs.db

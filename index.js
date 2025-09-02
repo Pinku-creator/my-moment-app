@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080; // <-- use PORT from env
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const methodOverride = require("method-override");
@@ -10,8 +10,9 @@ const multer = require("multer");
 const fs = require("fs");
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // add this
 
-app.set("views engine", "ejs");
+app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
@@ -103,10 +104,30 @@ app.get("/posts", (req, res) => {
 app.get("/posts/new", (req, res) => {
   res.render("new.ejs");
 });
-app.post("/posts", (req, res) => {
-  let { user, imageUrl, caption, likes, location, mood } = req.body;
+// app.post("/posts", (req, res) => {
+//   let { user, imageUrl, caption, likes, location, mood } = req.body;
+//   let id = uuidv4();
+//   posts.push({ id, user, imageUrl, caption, likes, location, mood });
+//   res.redirect("/posts");
+// });
+app.post("/posts", upload.single("imageFile"), (req, res) => {
+  let { user, caption, likes, location, mood } = req.body;
   let id = uuidv4();
-  posts.push({ id, user, imageUrl, caption, likes, location, mood });
+
+  // if image uploaded, save path
+  let imageUrl = req.file ? "/uploads/" + req.file.filename : "/default.png";
+
+  posts.push({
+    id,
+    user,
+    imageUrl,
+    caption,
+    likes,
+    location,
+    mood,
+    profilePic: `https://i.pravatar.cc/150?u=${user}`, // auto profile
+  });
+
   res.redirect("/posts");
 });
 
