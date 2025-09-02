@@ -98,6 +98,10 @@ let posts = [
 ];
 
 app.get("/", (req, res) => {
+  res.redirect("/posts"); // root pe jaane se /posts dikhe
+});
+
+app.get("/posts", (req, res) => {
   res.render("index.ejs", { posts });
 });
 
